@@ -1,23 +1,21 @@
-This Python script automates the extraction of electoral roll metadata from the ERMS Assam portal. It navigates through nested dropdown selections to compile a complete mapping of Districts, Zila Parishads, Gaon Panchayats, Wards, and Polling Stations into an Excel file.
+# Assam Panchayat Electoral Roll - Full State Scraper
+This repository contains a specialized Selenium-based scraper designed to map the entire electoral hierarchy of Assam's Panchayat system. It traverses every District, Zila Parishad, Gaon Panchayat, and Ward to compile a master list of Polling Stations.
 
-📋 Features
-Hierarchical Scraping: Automatically handles dependent dropdowns.
+## Scope: All in Assam
+This script is configured to scrape all **27+ Districts** under the Assam Panchayat Act, covering:
+* **~400** Zila Parishad Constituencies (ZPC)
+* **~2,200** Gaon Panchayats (GP)
+* **~22,000** Wards
+* **~25,000+** Polling Stations (Booths)
 
-Resilient Selection: Uses a force_select mechanism to ensure the UI updates before proceeding.
+## Technical Workflow
+The scraper uses a deep-nested loop logic with **Force-Selection** to handle the state-dependent dropdowns on the ERMS Assam portal:
+1. **District Level:** Initializes the session.
+2. **ZPC Level:** Refreshes based on District choice.
+3. **GP Level:** Filters based on ZPC.
+4. **Ward Level:** Pulls specific ward boundaries.
+5. **Booth Level:** Extracts the final Polling Station data.
 
-Data Export: Saves progress to a .xlsx file using pandas.
-
-Clean Exit: Ensures the browser closes and data is saved even if an error occurs.
-
-🛠️ Prerequisites
-Before running the script, ensure you have the following installed:
-
-Python 3.8+
-
-Selenium: For browser automation.
-
-BeautifulSoup4: For fast parsing of dropdown options.
-
-Pandas & Openpyxl: For data manipulation and Excel export.
-
-Webdriver: (e.g., ChromeDriver) matching your browser version.
+## Setup & Requirements
+```bash
+pip install selenium beautifulsoup4 pandas openpyxl
